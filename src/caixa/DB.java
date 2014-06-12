@@ -11,7 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  *
@@ -32,7 +31,7 @@ public class DB {
         return con;
     }
     
-    public ResultSet query(String query) throws SQLException{
+    public ResultSet readQuery(String query) throws SQLException{
         
         PreparedStatement stt = getConnection().prepareStatement(query);
         stt.execute();
@@ -41,4 +40,11 @@ public class DB {
         
     }
     
+    public boolean writeQuery(String query) throws SQLException{
+        
+        PreparedStatement stt = getConnection().prepareStatement(query);
+        boolean res = stt.execute();
+        return res;
+        
+    }
 }
