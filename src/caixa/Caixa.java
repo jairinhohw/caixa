@@ -5,14 +5,12 @@
  */
 package caixa;
 
-import java.math.BigDecimal;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import javax.swing.DefaultListModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -28,6 +26,19 @@ public class Caixa extends javax.swing.JFrame {
     public Caixa() {
         initComponents();
         sup = new SupportCaixa(labTotal, list, txtCod, txtNome, txtQuant, txtValor);
+
+        this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "fecharCompra");
+        this.getRootPane().getActionMap().put("fecharCompra", new AbstractAction() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int resp = JOptionPane.showConfirmDialog(Caixa.this, "Encerrar compra?", "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (resp == 0) {
+                    sup.fecharCompra();
+                }
+            }
+        });
+
     }
 
     /**
@@ -58,11 +69,6 @@ public class Caixa extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(850, 645));
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                formKeyPressed(evt);
-            }
-        });
 
         list.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -182,10 +188,6 @@ public class Caixa extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-
-    }//GEN-LAST:event_formKeyPressed
 
     private void txtCodKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodKeyPressed
 

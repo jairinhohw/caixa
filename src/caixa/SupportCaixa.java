@@ -2,10 +2,14 @@
 package caixa;
 
 import java.awt.event.KeyEvent;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -35,6 +39,54 @@ public class SupportCaixa {
         txtCod.requestFocus();
         txtQuant.setText("1");
         list.setModel(mod);
+    }
+    
+    public void fecharCompra(){
+        Double troco = Double.NaN;
+        Timestamp data = new Timestamp(System.currentTimeMillis());
+        String desc = "";
+        boolean erro = false;
+        double val_total = 0;
+        
+        while(troco.equals(Double.NaN)){
+            try{
+                troco = Double.parseDouble(JOptionPane.showInputDialog("Dinheiro recebido"));
+            }catch(NumberFormatException ex){}
+        }
+        setValTotal();
+        JOptionPane.showMessageDialog(null, "Troco:\n"+format.format(troco-valTotal));
+        
+        val_total = valTotal;
+        int i = mod.getSize();
+        int x = 0;
+        while(x<i){
+            desc += mod.elementAt(x)+"\n";
+            x++;
+        }
+        try {
+            new DB().writeQuery("insert into historico values(null,'"
+                    + data.toString() + "','"
+                    + desc + "','"
+                    + val_total + "')");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na conexão com o banco de dados!", "Erro:", JOptionPane.ERROR_MESSAGE);
+            erro = true;
+        }
+        if(!erro){
+            limpar();
+        }
+    }
+    
+    public void limpar(){
+        txtCod.setText("");
+        txtNome.setText("");
+        txtQuant.setText("");
+        txtValor.setText("");
+        labTotal.setText("0,00");
+        
+        valTotal = 0;
+        mod.clear();
+        unitVal.clear();
     }
     
     public void listKey(KeyEvent evt){
