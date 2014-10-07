@@ -1,15 +1,17 @@
 
 package caixa;
 
+import impressora.Comandos;
+import impressora.Imp;
 import java.awt.event.KeyEvent;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -42,19 +44,19 @@ public class SupportCaixa {
     }
     
     public void fecharCompra(){
-        Double troco = Double.NaN;
+        Double recebido = Double.NaN;
         Timestamp data = new Timestamp(System.currentTimeMillis());
         String desc = "";
         boolean erro = false;
         double val_total = 0;
         
-        while(troco.equals(Double.NaN)){
+        while(recebido.equals(Double.NaN)){
             try{
-                troco = Double.parseDouble(JOptionPane.showInputDialog("Dinheiro recebido"));
+                recebido = Double.parseDouble(JOptionPane.showInputDialog("Dinheiro recebido"));
             }catch(NumberFormatException ex){}
         }
         setValTotal();
-        JOptionPane.showMessageDialog(null, "Troco:\n"+format.format(troco-valTotal));
+        JOptionPane.showMessageDialog(null, "Troco:\n"+format.format(recebido-valTotal));
         
         val_total = valTotal;
         int i = mod.getSize();
@@ -74,6 +76,29 @@ public class SupportCaixa {
         }
         if(!erro){
             limpar();
+            
+            Imp.imprime(Comandos.sublinhadoOn+"Sorvetes Wiethan"+Comandos.sublinhadoOff);
+            Imp.imprime("CNPJ: 13.014.624/0001-00");
+            Imp.imprime("Fone: (55) 3025-2603");
+            Imp.imprime("Rua Armando Ricardo Wiethan");
+            Imp.imprime("Santa Maria, RS");
+            Imp.imprime("");
+            
+            DateFormat d = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            
+            Imp.imprime(d.format((new Date(System.currentTimeMillis()))));
+            
+            Imp.imprime("");
+            Imp.imprime(desc);
+            Imp.imprime("");
+            Imp.imprime("Total: "+val_total);
+            Imp.imprime("Recebido: "+recebido);
+            Imp.imprime("Troco: "+(-val_total+recebido));
+            Imp.imprime(Comandos.negritoOn+" ESTE NAO E UM DOCUMENTO FISCAL ");
+            Imp.imprime("\n\n\n");
+            Imp.imprime(Comandos.cortar);
+            Imp.imprime(Comandos.abreGaveta);
+            
         }
     }
     
