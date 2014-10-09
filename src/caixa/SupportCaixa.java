@@ -77,27 +77,31 @@ public class SupportCaixa {
         if(!erro){
             limpar();
             
-            Imp.imprime(Comandos.sublinhadoOn+"Sorvetes Wiethan"+Comandos.sublinhadoOff);
-            Imp.imprime("CNPJ: 13.014.624/0001-00");
-            Imp.imprime("Fone: (55) 3025-2603");
-            Imp.imprime("Rua Armando Ricardo Wiethan");
-            Imp.imprime("Santa Maria, RS");
-            Imp.imprime("");
+            String imprimir = "";
+            
+            imprimir +=(Comandos.sublinhadoOn+"Sorvetes Wiethan"+Comandos.sublinhadoOff+"\n");
+            imprimir +=("Fone: (55) 3025-2603"+"\n");
+            imprimir +=("Rua Armando Ricardo Wiethan, n: 5016"+"\n");
+            imprimir +=("Passo da Ferreira, Santa Maria, RS"+"\n");
+            imprimir +=("CNPJ: 13.014.624/0001-00"+"\n");
+            imprimir +=("\n");
             
             DateFormat d = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             
-            Imp.imprime(d.format((new Date(System.currentTimeMillis()))));
+            imprimir +=(d.format((new Date(System.currentTimeMillis())))+"\n");
             
-            Imp.imprime("");
-            Imp.imprime(desc);
-            Imp.imprime("");
-            Imp.imprime("Total: "+val_total);
-            Imp.imprime("Recebido: "+recebido);
-            Imp.imprime("Troco: "+(-val_total+recebido));
-            Imp.imprime(Comandos.negritoOn+" ESTE NAO E UM DOCUMENTO FISCAL ");
-            Imp.imprime("\n\n\n");
-            Imp.imprime(Comandos.cortar);
-            Imp.imprime(Comandos.abreGaveta);
+            imprimir +=("\n");
+            imprimir +=(desc+"\n");
+            imprimir +=("\n");
+            imprimir +=("Total: "+val_total+"\n");
+            imprimir +=("Recebido: "+recebido+"\n");
+            imprimir +=("Troco: "+(-val_total+recebido)+"\n\n");
+            imprimir +=(Comandos.negritoOn+" ESTE NAO E UM DOCUMENTO FISCAL "+"\n");
+            imprimir +=("\n\n\n\n");
+            imprimir +=(Comandos.cortar);
+            imprimir +=(Comandos.abreGaveta);
+            
+            Imp.imprime(imprimir);
             
         }
     }
@@ -105,7 +109,7 @@ public class SupportCaixa {
     public void limpar(){
         txtCod.setText("");
         txtNome.setText("");
-        txtQuant.setText("");
+        txtQuant.setText("1");
         txtValor.setText("");
         labTotal.setText("0,00");
         

@@ -247,7 +247,7 @@ public class Caixa extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 
-                Imp.detectaImpressoras("MP-4200 TH");
+                Imp.detectaImpressoras("MP-4200-TH");
                 
                 new Caixa().setVisible(true);
             }
