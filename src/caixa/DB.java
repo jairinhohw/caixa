@@ -19,10 +19,10 @@ import java.sql.SQLException;
 public class DB {
     
     private Connection con = null;
-    private final String host = "192.168.1.10";
+    private final String host = "192.168.1.50";
     private final String banco = "caixa";
-    private final String user = "jai";
-    private final String senha = "jhw1414jhw";
+    private final String user = "caixa";
+    private final String senha = "caixa";
     
     public Connection getConnection() throws SQLException{
         

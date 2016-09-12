@@ -67,9 +67,7 @@ public class Caixa extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(850, 645));
 
         list.setFont(new java.awt.Font("Arial Black", 0, 18)); // NOI18N
         list.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -206,14 +204,14 @@ public class Caixa extends javax.swing.JFrame {
         txtQuant.selectAll();
     }//GEN-LAST:event_txtQuantFocusGained
 
-    private void listKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listKeyPressed
-        sup.listKey(evt);
-    }//GEN-LAST:event_listKeyPressed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         String[] st = {""};
         Cadastrar.main(st);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void listKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listKeyPressed
+        sup.listKey(evt);
+    }//GEN-LAST:event_listKeyPressed
 
     /**
      * @param args the command line arguments
